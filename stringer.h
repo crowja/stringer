@@ -1,6 +1,6 @@
 /**
  *  @file stringer.h
- *  @version 0.0.0
+ *  @version 0.1.0-dev0
  *  @date Mon Dec 30 17:41:00 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME

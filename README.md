@@ -1,2 +1,2 @@
-# stringer 0.0.0.
+# stringer 0.1.0-dev0.
 

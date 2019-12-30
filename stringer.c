@@ -1,6 +1,6 @@
 /**
  *  @file stringer.c
- *  @version 0.0.0
+ *  @version 0.1.0-dev0
  *  @date Mon Dec 30 17:41:00 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
@@ -59,7 +59,7 @@ stringer_free(struct stringer **pp)
 const char *
 stringer_version(void)
 {
-   return "0.0.0";
+   return "0.1.0-dev0";
 }
 
 int
