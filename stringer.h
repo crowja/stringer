@@ -1,7 +1,7 @@
 /**
  *  @file stringer.h
  *  @version 0.0.0
- *  @date Mon Dec 30 13:40:28 CST 2019
+ *  @date Mon Dec 30 15:36:40 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -30,15 +30,6 @@ struct stringer *stringer_new(void);
  *  @param[in, out] p.
  */
 void        stringer_free(struct stringer **pp);
-
-/**
- *  @brief Initialize a stringer object.
- *  @details FIXME longer description here ...
- *  @param[in,out] p Pointer to a stringer object
- *  @param[in] x FIXME
-    @returns FIXME
- */
-int         stringer_init(struct stringer *p, void *x);
 
 /**
  *  @brief Return the version of this package.

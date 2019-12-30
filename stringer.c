@@ -1,7 +1,7 @@
 /**
  *  @file stringer.c
  *  @version 0.0.0
- *  @date Mon Dec 30 13:40:28 CST 2019
+ *  @date Mon Dec 30 15:36:40 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -26,8 +26,8 @@ struct stringer {
    void       *x;
    char       *buffer;
    char      **list;
-   size_t      buflen;                      /* length of used buffer */
-   size_t      bufsiz;                      /* size of allocated buffer */
+   size_t      next;
+   size_t      count;
 };
 
 struct stringer *
@@ -41,10 +41,8 @@ stringer_new(void)
 
    tp->buffer = NULL;
    tp->list = NULL;
-   tp->bufsiz = 0;
-   tp->buflen = 0;
-
-   /* Do some magic here ... */
+   tp->next = 0;
+   tp->count = 0;
 
    return tp;
 }
@@ -52,21 +50,9 @@ stringer_new(void)
 void
 stringer_free(struct stringer **pp)
 {
-
-   /* Do some magic here ... */
-
+   _FREE((*pp)->buffer);
    _FREE(*pp);
    *pp = NULL;
-}
-
-int
-stringer_init(struct stringer *p, void *x)
-{
-
-   /* Do some magic here ... */
-   p->x = x;                                     /* FIXME */
-
-   return 0;
 }
 
 const char *
@@ -78,6 +64,8 @@ stringer_version(void)
 int
 stringer_empty(struct stringer *p)
 {
+   p->next = 0;
+   p->count = 0;
    return 0;
 }
 
@@ -87,18 +75,41 @@ stringer_insert(struct stringer *p, char *s)
    if (_IS_NULL(s))
       return 1;
    else {
-      size_t      need = p->buflen + strlen(s) + 1;
+      size_t      need = p->next + strlen(s) + 1;
       char       *tp = realloc(p->buffer, need * sizeof(char));
       if (_IS_NULL(tp))
          return 0;
+      else {
+         p->buffer = tp;
+         strcpy(p->buffer + p->next, s);
+         p->next = need;
+         p->count += 1;
+         return 1;
+      }
    }
-
-   return 0;
 }
 
 char      **
 stringer_strings(struct stringer *p)
 {
+   unsigned i, j;
+   unsigned k = 0;
+
+   p->list = realloc(p->list, p->count * sizeof(char *));
+
+   i = 0;
+   j = 0;
+   while (k < p->count) { 
+      if (p->buffer[j] == '\0') {
+         p->list = p->buffer + i;
+         j += 1;
+         i = j;
+         k += 1;
+      }
+      else
+         j += 1; 
+   }
+
    return NULL;
 }
 

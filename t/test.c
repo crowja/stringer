@@ -62,6 +62,20 @@ test_constr(void)
    ASSERT_EQUALS(NULL, z);
 }
 
+static void
+test_insert(void)
+{
+   struct stringer *z;
+
+   _printf_test_name("test_insert", "stringer_insert");
+
+   z = stringer_new();
+   stringer_insert(z, "cow");
+   stringer_insert(z, "crow");
+   stringer_free(&z);
+   ASSERT_EQUALS(NULL, z);
+}
+
 #if 0                                            /* 16 yy */
 static void
 test_stub(void)
@@ -87,6 +101,7 @@ main(void)
    printf("%s\n", stringer_version());
 
    RUN(test_constr);
+   RUN(test_insert);
 
    return TEST_REPORT();
 }
