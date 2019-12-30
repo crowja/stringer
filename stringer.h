@@ -1,7 +1,7 @@
 /**
  *  @file stringer.h
  *  @version 0.0.0
- *  @date Mon Dec 30 15:36:40 CST 2019
+ *  @date Mon Dec 30 17:41:00 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -39,6 +39,7 @@ const char *stringer_version(void);
 
 int         stringer_empty(struct stringer *p);
 int         stringer_insert(struct stringer *p, char *s);
-char      **stringer_strings(struct stringer *p);
+int         stringer_strings(struct stringer *p, unsigned *n, char ***cpp);
+
 
 #endif

@@ -62,9 +62,11 @@ test_constr(void)
    ASSERT_EQUALS(NULL, z);
 }
 
+#if 0
 static void
 test_insert(void)
 {
+   char      **cpp;
    struct stringer *z;
 
    _printf_test_name("test_insert", "stringer_insert");
@@ -72,6 +74,36 @@ test_insert(void)
    z = stringer_new();
    stringer_insert(z, "cow");
    stringer_insert(z, "crow");
+   cpp = stringer_strings(z);
+   printf("FOUND %s\n", cpp[0]);
+   printf("FOUND %s\n", cpp[1]);
+
+   stringer_free(&z);
+   ASSERT_EQUALS(NULL, z);
+}
+#endif
+
+static void
+test_insert(void)
+{
+   char      **cpp;
+   unsigned    n;
+   struct stringer *z;
+
+   _printf_test_name("test_insert2", "stringer_insert");
+
+   z = stringer_new();
+   stringer_insert(z, "cow");
+   stringer_insert(z, "");                       /* insert empty string */
+   stringer_insert(z, "crow");
+   stringer_insert(z, NULL);                     /* no-op */
+   stringer_insert(z, "horse");
+   stringer_strings(z, &n, &cpp);
+   ASSERT_STRING_EQUALS("cow", cpp[0]);
+   ASSERT_STRING_EQUALS("", cpp[1]);
+   ASSERT_STRING_EQUALS("crow", cpp[2]);
+   ASSERT_STRING_EQUALS("horse", cpp[3]);
+
    stringer_free(&z);
    ASSERT_EQUALS(NULL, z);
 }

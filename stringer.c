@@ -1,7 +1,7 @@
 /**
  *  @file stringer.c
  *  @version 0.0.0
- *  @date Mon Dec 30 15:36:40 CST 2019
+ *  @date Mon Dec 30 17:41:00 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -51,6 +51,7 @@ void
 stringer_free(struct stringer **pp)
 {
    _FREE((*pp)->buffer);
+   _FREE((*pp)->list);
    _FREE(*pp);
    *pp = NULL;
 }
@@ -89,28 +90,56 @@ stringer_insert(struct stringer *p, char *s)
    }
 }
 
+#if 0
 char      **
 stringer_strings(struct stringer *p)
 {
-   unsigned i, j;
-   unsigned k = 0;
+   unsigned    i, j;
+   unsigned    k = 0;
 
    p->list = realloc(p->list, p->count * sizeof(char *));
 
    i = 0;
    j = 0;
-   while (k < p->count) { 
+   while (k < p->count) {
       if (p->buffer[j] == '\0') {
-         p->list = p->buffer + i;
-         j += 1;
+         (p->list)[k] = p->buffer + i;
+         j++;
+         k++;
          i = j;
-         k += 1;
       }
       else
-         j += 1; 
+         j++;
    }
 
-   return NULL;
+   return p->list;
+}
+#endif
+
+int
+stringer_strings(struct stringer *p, unsigned *n, char ***cpp)
+{
+   unsigned    i = 0, j = 0, k = 0;
+
+   p->list = realloc(p->list, p->count * sizeof(char *));
+   if (_IS_NULL(p->list))
+      return 1;
+
+   while (k < p->count) {
+      if (p->buffer[j] == '\0') {
+         (p->list)[k] = p->buffer + i;
+         j++;
+         k++;
+         i = j;
+      }
+      else
+         j++;
+   }
+
+   *n = p->count;
+   *cpp = p->list;
+
+   return 0;
 }
 
 #undef  _IS_NULL
