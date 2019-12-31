@@ -1,7 +1,7 @@
 /**
  *  @file stringer.c
  *  @version 0.1.0-dev0
- *  @date Mon Dec 30 17:41:00 CST 2019
+ *  @date Mon Dec 30 18:21:27 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -137,7 +137,7 @@ stringer_strings(struct stringer *p, unsigned *n, char ***cpp)
    }
 
    *n = p->count;
-   *cpp = p->list;
+   *cpp = (0 == p->count ? NULL : p->list);
 
    return 0;
 }

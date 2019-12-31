@@ -42,13 +42,6 @@ _printf_test_name(char *name, char *info)
       printf("\n");
 }
 
-static int
-_two_doubles_equal(double x, double y)
-{
-   double      t = fabs(x) + fabs(y);
-   return fabs(x - y) < 4 * DBL_EPSILON * t ? 1 : 0;
-}
-
 static void
 test_constr(void)
 {
@@ -58,6 +51,26 @@ test_constr(void)
 
    z = stringer_new();
    ASSERT("Constructor test", z);
+   stringer_free(&z);
+   ASSERT_EQUALS(NULL, z);
+}
+
+static void
+test_null(void)
+{
+   struct stringer *z;
+   char      **cpp;
+   unsigned    n;
+
+   _printf_test_name("test_null", "stringer_new, stringer_strings, stringer_free");
+
+   z = stringer_new();
+   ASSERT("Constructor test", z);
+
+   stringer_strings(z, &n, &cpp);
+   ASSERT_EQUALS(0, n);
+   ASSERT_EQUALS(NULL, cpp);
+
    stringer_free(&z);
    ASSERT_EQUALS(NULL, z);
 }
@@ -90,7 +103,7 @@ test_insert(void)
    unsigned    n;
    struct stringer *z;
 
-   _printf_test_name("test_insert2", "stringer_insert");
+   _printf_test_name("test_insert", "stringer_insert, stringer_strings");
 
    z = stringer_new();
    stringer_insert(z, "cow");
@@ -133,6 +146,7 @@ main(void)
    printf("%s\n", stringer_version());
 
    RUN(test_constr);
+   RUN(test_null);
    RUN(test_insert);
 
    return TEST_REPORT();
