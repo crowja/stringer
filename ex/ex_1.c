@@ -6,8 +6,8 @@ int
 main(void)
 {
    char        word[50];
-   char **list, **cpp;
-   unsigned n;
+   char      **list, **cpp;
+   unsigned    n;
    struct stringer *z = stringer_new();
 
    while (fscanf(stdin, "%s", word) > 0) {
@@ -20,11 +20,11 @@ main(void)
 #if 1
    cpp = list;
    while (NULL != *cpp)
-       printf("FOUND: %s\n", *cpp++);
+      printf("FOUND: %s\n", *cpp++);
 #else
    printf("FOUND: %s\n", list[0]);
 #endif
-    
+
    stringer_free(&z);
    return 0;
 }
