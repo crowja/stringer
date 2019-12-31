@@ -1,7 +1,7 @@
 /**
  *  @file stringer.c
  *  @version 0.1.0-dev0
- *  @date Mon Dec 30 18:21:27 CST 2019
+ *  @date Mon Dec 30 20:45:01 CST 2019
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -121,7 +121,8 @@ stringer_strings(struct stringer *p, unsigned *n, char ***cpp)
 {
    unsigned    i = 0, j = 0, k = 0;
 
-   p->list = realloc(p->list, p->count * sizeof(char *));
+   /* TODO next has p->count + 1 to allow tacking on a trailing NULL */
+   p->list = realloc(p->list, (p->count + 1) * sizeof(char *));
    if (_IS_NULL(p->list))
       return 1;
 
