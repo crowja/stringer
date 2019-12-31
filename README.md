@@ -21,7 +21,7 @@ I wanted a way to build up a list of strings one-by-one for situations in which
 this process would be repeated millions of times. It's straightforward to create
 a NULL-terminated list of strings, but, for me, it got a little tricky
 minimizing new mallocs and keeping track of allocated memory. Stringer has an
-internal buffer for storing strings
+internal buffer for storing strings like this
 
      d o g \0 c a t \0 m o u s e \0 ...
      ^        ^        ^            ^
