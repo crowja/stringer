@@ -1,6 +1,6 @@
 /**
  *  @file stringer.c
- *  @version 0.2.0-dev0
+ *  @version 0.3.0-dev0
  *  @date Tue Dec 31 08:51:02 CST 2019
  *  @copyright 2020 John A. Crow <crowja@gmail.com>
  *  @license Unlicense <http://unlicense.org/>
@@ -58,7 +58,7 @@ stringer_free(struct stringer **pp)
 const char *
 stringer_version(void)
 {
-   return "0.2.0-dev0";
+   return "0.3.0-dev0";
 }
 
 int

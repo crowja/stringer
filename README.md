@@ -1,4 +1,4 @@
-# stringer 0.2.0-dev0.
+# stringer 0.3.0-dev0.
 
 Used like this:
 
