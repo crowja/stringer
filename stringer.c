@@ -2,9 +2,8 @@
  *  @file stringer.c
  *  @version 0.2.0-dev0
  *  @date Tue Dec 31 08:51:02 CST 2019
- *  @copyright %COPYRIGHT%
- *  @brief FIXME
- *  @details FIXME
+ *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @license Unlicense <http://unlicense.org/>
  */
 
 #include <stdlib.h>
