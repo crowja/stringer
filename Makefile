@@ -88,8 +88,8 @@ indent: stamp
 	@indent $(INDENT_FLAGS) ex/ex_1.c
 
 stamp:
-	@bash stamper.bash stringer.c
-	@bash stamper.bash stringer.h
+	@stamper.bash stringer.c
+	@stamper.bash stringer.h
 
 clean:
 	@/bin/rm -f *.o *~ *.BAK *.bak core.*
