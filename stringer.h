@@ -1,18 +1,13 @@
 /**
  *  @file stringer.h
  *  @version 0.3.0-dev0
- *  @date Tue Dec 31 08:51:02 CST 2019
+ *  @date Sun Feb 16, 2020 05:10:21 PM CST
  *  @copyright 2020 John A. Crow <crowja@gmail.com>
  *  @license Unlicense <http://unlicense.org/>
  */
 
-#ifndef _STRINGER_H_
-#define _STRINGER_H_
-
-#ifdef  _PACKAGE_NAME
-#undef  _PACKAGE_NAME
-#endif
-#define _PACKAGE_NAME "stringer"
+#ifndef STRINGER_H
+#define STRINGER_H
 
 struct stringer;
 
@@ -39,6 +34,5 @@ const char *stringer_version(void);
 int         stringer_empty(struct stringer *p);
 int         stringer_insert(struct stringer *p, char *s);
 int         stringer_strings(struct stringer *p, unsigned *n, char ***cpp);
-
 
 #endif

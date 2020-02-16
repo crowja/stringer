@@ -1,7 +1,7 @@
 /**
  *  @file stringer.c
  *  @version 0.3.0-dev0
- *  @date Tue Dec 31 08:51:02 CST 2019
+ *  @date Sun Feb 16, 2020 05:10:21 PM CST
  *  @copyright 2020 John A. Crow <crowja@gmail.com>
  *  @license Unlicense <http://unlicense.org/>
  */
@@ -11,15 +11,15 @@
 #include <string.h>                              /* FIXME */
 #include "stringer.h"
 
-#ifdef  _IS_NULL
-#undef  _IS_NULL
+#ifdef  IS_NULL
+#undef  IS_NULL
 #endif
-#define _IS_NULL(p)   ((NULL == (p)) ? (1) : (0))
+#define IS_NULL(p)   ((NULL == (p)) ? (1) : (0))
 
-#ifdef  _FREE
-#undef  _FREE
+#ifdef  FREE
+#undef  FREE
 #endif
-#define _FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
+#define FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
 struct stringer {
    void       *x;
@@ -35,7 +35,7 @@ stringer_new(void)
    struct stringer *tp;
 
    tp = (struct stringer *) malloc(sizeof(struct stringer));
-   if (_IS_NULL(tp))
+   if (IS_NULL(tp))
       return NULL;
 
    tp->buffer = NULL;
@@ -49,9 +49,9 @@ stringer_new(void)
 void
 stringer_free(struct stringer **pp)
 {
-   _FREE((*pp)->buffer);
-   _FREE((*pp)->list);
-   _FREE(*pp);
+   FREE((*pp)->buffer);
+   FREE((*pp)->list);
+   FREE(*pp);
    *pp = NULL;
 }
 
@@ -72,12 +72,12 @@ stringer_empty(struct stringer *p)
 int
 stringer_insert(struct stringer *p, char *s)
 {
-   if (_IS_NULL(s))
+   if (IS_NULL(s))
       return 1;
    else {
       size_t      need = p->next + strlen(s) + 1;
       char       *tp = realloc(p->buffer, need * sizeof(char));
-      if (_IS_NULL(tp))
+      if (IS_NULL(tp))
          return 0;
       else {
          p->buffer = tp;
@@ -122,7 +122,7 @@ stringer_strings(struct stringer *p, unsigned *n, char ***cpp)
 
    /* TODO next has p->count + 1 to allow tacking on a trailing NULL */
    p->list = realloc(p->list, (p->count + 1) * sizeof(char *));
-   if (_IS_NULL(p->list))
+   if (IS_NULL(p->list))
       return 1;
 
    while (k < p->count) {
@@ -143,5 +143,5 @@ stringer_strings(struct stringer *p, unsigned *n, char ***cpp)
    return 0;
 }
 
-#undef  _IS_NULL
-#undef  _FREE
+#undef  IS_NULL
+#undef  FREE
